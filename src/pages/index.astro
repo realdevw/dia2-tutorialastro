@@ -1,5 +1,7 @@
 ---
+import '../styles/global.css';
 
+const pageTitle = "Inicio";
 ---
 
 <html lang="en">
@@ -9,10 +11,10 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{pageTitle}</title>
 	</head>
 	<body>
-		<a href="/">Inicio</a>
+		<a href="/">{pageTitle}</a>
 		<a href="/about/">Sobre mí</a>
 		<a href="/blog/">Blog</a>
 		<h1>Eminem - Love The Way You Lie ft. Rihanna</h1>
