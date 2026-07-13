@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Sobre mi";
 
@@ -9,74 +9,53 @@ const identity = {
 	occupation: "Astro developer",
 	hobbies: ["Programar", "Jugar videojuegos", "Ver animes"],
 };
-const skills = [
-	"HTML",
-	"CSS",
-	"JavaScript",
-	"Astro"
-];
+const skills = ["HTML", "CSS", "JavaScript", "Astro"];
 
 const happy = true;
 const finished = false;
 const goal = 3;
 
-const skillColor = "crimson";
-const fontWeight = "bold";
-const textCase = "uppercase";
 
-const palabrasClave = ["Viva la Vida", "La vida una sola mi rey", "todos somos seres humanos aya"]
-
+const palabrasClave = [
+	"Viva la Vida",
+	"La vida una sola mi rey",
+	"todos somos seres humanos aya",
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<style define:vars={{skillColor, fontWeight, textCase}}>
-			h1 {
-				color: purple;
-				font-size: 4rem;
-			}
-			.skill {
-				color: var(--skillColor);
-				font-weight: var(--fontWeight);
-				text-transform: var(--textCase);
-			}
-		</style>
-	</head>
-	<body>
-        <a href="/">Inicio</a>
-        <a href="/about/">Sobre mí</a>
-        <a href="/blog/">Blog</a>
-		<h1>{pageTitle}</h1>
-        <h2>Mi nuevo sitio web ...</h2>
-        <p>Haciendo el tutorial de Astro, hasta el momento bien facil de entender</p>
-        <p>este sitio se irá actualizando con el tiempo</p>
+<BaseLayout pageTitle={pageTitle}>
+	<h2>Mi nuevo sitio web ...</h2>
+	<p>
+		Haciendo el tutorial de Astro, hasta el momento bien facil de entender
+	</p>
+	<p>este sitio se irá actualizando con el tiempo</p>
 
-		<p>He aqui algunos datos sobre mi</p>
+	<p>He aqui algunos datos sobre mi</p>
 
-		{happy && <p>Estoy feliz de seguir este proceso con Astro</p>}
-		{finished && <p>He terminado de seguir este proceso con Astro</p>}
-		{goal === 3 && <p>Tengo un objetivo de {goal} en este proceso con Astro</p>}
+	{happy && <p>Estoy feliz de seguir este proceso con Astro</p>}
+	{finished && <p>He terminado de seguir este proceso con Astro</p>}
+	{goal === 3 && <p>Tengo un objetivo de {goal} en este proceso con Astro</p>}
 
+	<ul>
+		<li>Mi nombre es {identity.firstName}</li>
+		<li>
+			Vivo en {identity.country} y trabajo como {identity.occupation}.
+		</li>
+		{
+			identity.hobbies.length >= 2 && (
+				<li>
+					Dos de mis aficiones son: {identity.hobbies[0]} y{" "}
+					{identity.hobbies[1]}
+				</li>
+			)
+		}
+		<p>Mis habilidades son:</p>
 		<ul>
-			<li>Mi nombre es {identity.firstName}</li>
-			<li>Vivo en {identity.country} y trabajo como {identity.occupation}.</li>
-			{identity.hobbies.length >= 2 &&
-				<li>Dos de mis aficiones son: {identity.hobbies[0]} y {identity.hobbies[1]}</li>
-			}
-			<p>Mis habilidades son:</p>
-			<ul>
-				{skills.map((skill) => <li class="skill">{skill}</li>)}
-			</ul>
+			{skills.map((skill) => <li class="skill">{skill}</li>)}
 		</ul>
+	</ul>
 
-		<ul>
-			{palabrasClave.map((palabra)=> <li>{palabra}</li>)}
-		</ul>
-	</body>
-</html>
+	<ul>
+		{palabrasClave.map((palabra) => <li>{palabra}</li>)}
+	</ul>
+</BaseLayout>

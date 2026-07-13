@@ -1,28 +1,15 @@
 ---
-import '../styles/global.css';
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 const pageTitle = "Mi Blog";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-		<a href="/">Inicio</a>
-		<a href="/about/">Sobre mí</a>
-		<a href="/blog/">{pageTitle}</a>
-		<h1>Este es la otra página llamada blog</h1>
-		<p>Este es un párrafo de prueba para ver si funciona el blog</p>
-		<ul>	
-			<li><a href="/posts/post-1/">Publicacion 1</a></li>
-			<li><a href="/posts/post-2/">Publicacion 2</a></li>
-			<li><a href="/posts/post-3/">Publicacion 3</a></li>
-		</ul>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+	<h2>Este es la otra página llamada blog</h2>
+	<p>Este es un párrafo de prueba para ver si funciona el blog</p>
+	<ul>
+		{allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title}/>)}
+	</ul>
+</BaseLayout>
+<!--  -->
